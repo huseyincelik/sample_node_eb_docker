@@ -4,15 +4,15 @@ language: node_js
 env:
   global:
     - REPO=sample-node-eb-docker
-    - DOCKER_HUB_URL=shadysql # {account name}
+    - DOCKER_HUB_URL=endymyon # {account name}
     #- AMAZON_ECR_URL=288971733297.dkr.ecr.us-east-1.amazonaws.com # {AWS account ID}.dkr.ecr.us-east-1
     #- QUAY_URL="quay.io/ttrahan" # quay.io/{account name}
 
 build:
   ci:
-    - echo 'CI is running'
+    - echo 'CI is running i think'
   post_ci:
-      - docker build -t="shadysql/$REPO:$BRANCH.$BUILD_NUMBER" .
+      - docker build -t="endymyon/$REPO:$BRANCH.$BUILD_NUMBER" .
 
       # Pushing to different registries
 
@@ -46,8 +46,8 @@ integrations:
        type: aws
        target: eb_docker
        application_name: "shippable-demo-eb"
-       env_name: "shippable-demo-eb2"
-       bucket_name: "elasticbeanstalk-eu-west-1-972257354190"
+       env_name: "shippableDemoEb-env"
+       bucket_name: "elasticbeanstalk-eu-west-1-187088870413"
        region: "eu-west-1"
        image_name: "$DOCKER_HUB_URL/$REPO"
        image_tag: "$BRANCH.$BUILD_NUMBER"
@@ -66,7 +66,7 @@ integrations:
   hub:
     #- integrationName: "Amazon ECR - ttrahan"
     # type: ecr
-    - integrationName: "MyDockerHub"
+    - integrationName: "docker"
       type: docker
     # - integrationName: "Quay - ttrahan"
     #   type: quay.io
